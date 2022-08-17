@@ -20,6 +20,37 @@ function generatePassword(){
   var userWantsLcase = window.confirm("Would you like lowercase letters in your password")
   var userWantsUcase = window.confirm("Would you like uppercase letters in your password")
 
+  var numberList = ["0","1","2","3","4","5","6","7","8","9"]
+  var symbolList = ["!","@","#","$","%","^","&", "*","(",")","_","-"]
+  var lowercase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+  var uppercase = []
+
+  var userOptions = []
+
+  
+
+  for (var i = 0; i < lowercase.length; i++){
+    uppercase[i] = lowercase[i].toUpperCase()
+  }
+
+  if(userWantsNumbers){
+    userOptions.push(numberList)
+  }
+
+  if(userWantsSymbols){
+    userOptions.push(symbolList)
+  }
+
+  if(userWantsLcase){
+    userOptions.push(lowercase)
+  }
+
+  if(userWantsUcase){
+    userOptions.push(uppercase)
+  }
+
+  console.log(userOptions)
+
 }
 
 // Write password to the #password input
