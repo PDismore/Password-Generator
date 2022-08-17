@@ -1,6 +1,15 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+function randomInteger(min,max){
+  return Math.floor(Math.random()*(max - min) +min)
+
+}
+
+function getRandomItem(list){
+  return list[randomInteger(0, list.length - 1)]
+}
+
 function generatePassword(){
   var userInput = window.prompt("How long do you want your password to be?")
   var pwordLength = parseInt(userInput)
@@ -49,7 +58,13 @@ function generatePassword(){
     userOptions.push(uppercase)
   }
 
-  console.log(userOptions)
+  var newPassword = ""
+
+  for (var i = 0; i < pwordLength; i++) {
+    var randomList = getRandomItem(userOptions)
+    var randomCharacter = getRandomItem(randomList)
+    console.log(randomCharacter)
+  }
 
 }
 
