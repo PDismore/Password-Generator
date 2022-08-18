@@ -2,8 +2,12 @@
 var generateBtn = document.querySelector("#generate");
 
 function randomInteger(min,max){
-  return Math.floor(Math.random()*(max - min) +min)
-
+ if(!max){
+  max = min
+  min = 0
+ }
+ var randNum = Math.random()
+ return Math.floor(min*(1 - randNum)+randNum*max)
 }
 
 function getRandomItem(list){
@@ -31,16 +35,12 @@ function generatePassword(){
 
   var numberList = ["0","1","2","3","4","5","6","7","8","9"]
   var symbolList = ["!","@","#","$","%","^","&", "*","(",")","_","-"]
-  var lowercase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-  var uppercase = []
+  var lowercaseList = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+  var uppercaseList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  var nothingSelected = ["You need to select at least one :,("]
 
   var userOptions = []
 
-  
-
-  for (var i = 0; i < lowercase.length; i++){
-    uppercase[i] = lowercase[i].toUpperCase()
-  }
 
   if(userWantsNumbers){
     userOptions.push(numberList)
@@ -51,11 +51,16 @@ function generatePassword(){
   }
 
   if(userWantsLcase){
-    userOptions.push(lowercase)
+    userOptions.push(lowercaseList)
   }
 
   if(userWantsUcase){
-    userOptions.push(uppercase)
+    userOptions.push(uppercaseList)
+  }
+
+  if (userOptions.length === 0){
+    window.alert(nothingSelected)
+    return
   }
 
   var newPassword = ""
@@ -63,9 +68,10 @@ function generatePassword(){
   for (var i = 0; i < pwordLength; i++) {
     var randomList = getRandomItem(userOptions)
     var randomCharacter = getRandomItem(randomList)
-    console.log(randomCharacter)
+    newPassword += randomCharacter
   }
-
+ 
+  return newPassword
 }
 
 // Write password to the #password input
